@@ -1,0 +1,16 @@
+{
+  "name": "nedsbeds/profile_split_enable",
+  "type": "drupal-module",
+  "description": "Allows Drupal sites using multiple profiles, CMI and config split to have a config split defined for each profile",
+  "homepage": "https://github.com/nedsbeds/profile_split_enable",
+  "license": "GPL-2.0+",
+  "require": {
+    "drupal/core": "^8.6",
+    "drupal/config_filter": "^1.0.0"
+  },
+  "suggest": {
+    "drupal/config_split": "^1.0.0"
+  },
+  "require-dev": {
+  }
+}
