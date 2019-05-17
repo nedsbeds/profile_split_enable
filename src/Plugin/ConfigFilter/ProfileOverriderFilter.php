@@ -19,18 +19,16 @@ use Drupal\Core\Extension\ProfileExtensionList;
 class ProfileOverriderFilter extends ConfigFilterBase implements ContainerFactoryPluginInterface {
 
   /**
+   * Service that allows us to obtain the profile name and parent.
    *
-   * @var ProfileExtensionList Service that allows us to obtain the profile name and parent
+   * @var Drupal\Core\Extension\ProfileExtensionList
    */
   private $profileExtensionList;
 
   /**
    * ProfileOverriderFilter constructor.
    *
-   * @param array $configuration
-   * @param $plugin_id
-   * @param $plugin_definition
-   * @param $profileExtensionList
+   * @inheritdoc
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, $profileExtensionList) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
@@ -38,14 +36,12 @@ class ProfileOverriderFilter extends ConfigFilterBase implements ContainerFactor
   }
 
   /**
-   * Function for dependency injection
+   * Function for dependency injection.
    *
-   * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
-   * @param array $configuration
-   * @param string $plugin_id
-   * @param mixed $plugin_definition
+   * @inheritdoc
    *
    * @return \Drupal\profile_split_enable\Plugin\ConfigFilter\ProfileOverriderFilter
+   *   Our instantiated filter plugin.
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     return new static(
@@ -57,12 +53,13 @@ class ProfileOverriderFilter extends ConfigFilterBase implements ContainerFactor
   }
 
   /**
-   * Alter the sync storage profile when importing
+   * Alter the sync storage profile when importing.
+   *
    * {@inheritdoc}
    */
   public function filterReadMultiple(array $names, array $data) {
-    //The DB will contain our installed profile name. Override the value read
-    // from the sync directory with the currently installed profile so they match
+    /* The DB will contain our installed profile name. Override the value read
+    from the sync directory with the currently installed profile so they match.*/
     if (in_array('core.extension', $names)) {
       $data['core.extension']['module'][\Drupal::installProfile()] = 1000;
       $data['core.extension']['profile'] = \Drupal::installProfile();
@@ -71,13 +68,14 @@ class ProfileOverriderFilter extends ConfigFilterBase implements ContainerFactor
   }
 
   /**
-   * Alter the active storage profile when exporting
+   * Alter the active storage profile when exporting.
+   *
    * {@inheritdoc}
    */
   public function filterWrite($name, array $data) {
 
-    //overwrite the core.extension details to match the base profile since this value
-    //will be in the sync directory and we do not want to alter it
+    /* Overwrite the core.extension details to match the base profile since this
+    value will be in the sync directory and we do not want to alter it. */
     if ($name == 'core.extension') {
       $profileInfo = $this->profileExtensionList->getExtensionInfo(\Drupal::installProfile());
 
@@ -88,5 +86,5 @@ class ProfileOverriderFilter extends ConfigFilterBase implements ContainerFactor
 
     return $data;
   }
-}
 
+}

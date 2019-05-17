@@ -1,7 +1,0 @@
-services:
-  splitenable_event_subscriber:
-    class: Drupal\profile_split_enable\EventSubscriber\SplitEnableSubscriber
-    tags:
-      - {name: event_subscriber}
-    calls:
-      - [setContainer, ['@service_container']]

@@ -1,7 +1,9 @@
 # Profile Split Enable
-This module allows Drupal the installation of multiple sites on the same codebase to use multiple profiles. When combined with CMI and config split we can have a config split defined for each profile.
+This module allows you to install Drupal from a custom Drupal installation profile, ignoring the profile that is set in the default core.extension.yml file. 
 
-## Purpose
+When using `config_split` it allows you to dynamically enable and import configuration from a config split for each of your custom installation profiles.
+
+## Introduction
 
 Theoretically, using multi-site Drupal 8, you might want to have multiple profiles. Then, you can install various sites on your multi-site platform from any one of the profiles. Going a step farther, you likely want to have configuration for each of the profiles.
 
@@ -19,7 +21,14 @@ Additionally, if you are using `config_split`, it will enable a split that match
 
 ## Requirements
 
-This module requires Drupal 8 and the `config_filter` module. You will likely use `config_split` to allow different config per profile.
+This module requires the following modules:
+
+* Config Filter (https://www.drupal.org/project/config_filter)
+
+## Recommended Modules
+
+* Config Split (https://www.drupal.org/project/config_split): 
+ When enabled it will allow different config per profile. This module will automatically enable the relevant split
 
 ## Installation
 
@@ -27,7 +36,13 @@ This module is distributed through packagist therefore should be installed using
 
 `composer require nedsbeds/profile_split_enable ^1.0.0`
 
-## Usage
+* Install as you would normally install a contributed Drupal module. 
+
+  Visit: https://www.drupal.org/documentation/install/modules-themes/modules-8 for further information.
+
+## Configuration
+
+The module has no menu or modifiable settings. There is no configuration. 
 
 For this module to function, you MUST add it as a dependency of your profile, and then ensure it is also enabled in config (i.e. your `core.extenstion` file)
 
@@ -69,3 +84,6 @@ After the first installation of Drupal with your base profile, enable the `confi
 ## Limitations/Outstanding features
 This module does not currently support installation from existing configuration. You are expected to be using a workflow that involves installing Drupal from a profile and then importing configuration. This workflow is the approach that tools such as Acquia BLT and Acquia ACSF utilise. 
 
+## Maintainers
+
+* Nick Downton (nedsbeds) - https://www.drupal.org/user/2720065 
