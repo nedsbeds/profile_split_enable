@@ -1,0 +1,25 @@
+<?php
+
+/**
+ * @file
+ * Implements hook for altering currently active filter profiles.
+ */
+
+/**
+ * Implements hook_config_filter_info_alter().
+ *
+ * @param $definitions
+ *  The plugin definitions that we will need to alter
+ */
+function profile_split_enable_config_filter_info_alter(&$definitions)
+{
+  $container = \Drupal::getContainer();
+
+  // Find the installed Profile.
+  $active_profile = $container->getParameter('install_profile');
+
+  // If a corresponding split exists, enable it.
+  if(isset($definitions['config_split:'.$active_profile])) {
+    $definitions['config_split:'.$active_profile]['status'] = true;
+  }
+}
