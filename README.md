@@ -1,3 +1,9 @@
+# Github Repo deprecated!
+This module is now managed at Drupal.org https://www.drupal.org/project/profile_split_enable
+
+To switch, please run `composer remove nedsbeds/profile_split_enable` and `composer require 'drupal/profile_split_enable:^2.0'`
+
+
 # Profile Split Enable
 This module allows you to install Drupal from a custom Drupal installation profile, ignoring the profile that is set in the default core.extension.yml file. 
 
